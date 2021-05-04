@@ -1,0 +1,55 @@
+body{
+    padding:0;
+    margin:0;
+    height: 1000px;
+}
+.forms{
+    width: 500px;
+    padding: 50px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #795303;
+    color:beige;
+    margin: 50px 0;  
+}
+.form input[type="file"]{
+    border: 0;
+    background: none;
+    display: block;
+
+    width: 500px;
+    border: 2px solid #3498db;
+    margin: 20px auto;
+    text-align: center;
+    padding:14px 10px;
+    color: white;
+    outline: none;
+}
+.forms input[type="text"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 0px;
+    width: 500px;
+    outline: none;
+    color:white;
+}
+.postsan{
+    position: absolute;
+    left: 50%;
+    top: 120%;
+    transform: translate(-50%,0%);
+    bottom: 0;
+    }
+.postsan{
+    height: auto;
+    width: auto;
+    margin:20px auto;
+}    
+

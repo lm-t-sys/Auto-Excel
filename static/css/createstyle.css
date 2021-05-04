@@ -1,0 +1,54 @@
+body{
+  
+    margin:10px;
+    padding : 30px;
+    font-family: sans-serif;
+    background:#cefadb;
+    
+  }
+  
+  .box{
+    position:absolute;
+    padding:20%;
+    margin:100px;
+    top:50%;
+    left:50%;
+    
+    
+    transform: translate(-50%,-50%);
+  
+    background: #fcf9f9;
+    text-align:center;
+    border-top:20% solid red;
+    border-bottom:5px solid red;
+  }
+  .box textarea{
+    size:100px,300px;
+  }
+  .box .nyu {
+    background: cadetblue;
+    border-color: red; 
+  }
+  .box input[type='text'],.box textarea{
+    border : 3px solid #036d09;
+    background: none;
+    display: block;
+    margin:10px auto;
+    padding:14px,10px;
+    outline:none;
+    color :black;
+  
+  }
+  .box input[type='text']:focus,.box textarea:focus{
+    width:200px;
+    border-color: #21fc04;
+    transition: 0.2s;
+  }
+  .box input[type=submit]{
+  background-color:white;
+  border:1px solid black;
+  }
+  .box input[type=submit]:hover{
+    cursor: pointer;
+  }
+  

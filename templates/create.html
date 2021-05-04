@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>Auto Excel Form</title>
+    <link rel="stylesheet" href= "static\\css\\createstyle.css" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+<form class="box" action="/create" method="POST">
+  <h4>excel自動作成(列基準)</h4><br>
+  必ず2か5はどちらかを入力してください。
+  <input type="text" name="indexs" placeholder="例:生徒1,生徒2,生徒3">
+  <input type="text" name="columns" placeholder="例:国語,数学,英語,理科,社会">
+  
+    この欄のみ必須です
+  
+  <textarea rows=6 required name='values' placeholder="コンマ(',')区切りで入力して下さい."></textarea>
+  <h5>行と列を指定できます(任意)</h5>
+  
+  <input type="text" name="btn1" placeholder="行(任意)例:2">
+  <input type="text" name="btn2" placeholder="列 例:3">
+  
+  <input type="submit" name="Go" required placeholder="実行">
+
+  <div class='forms'>
+    {{posts}}<br>
+    </div>
+    <a href="static\\excelfolder\\to_csv.xlsx" download='post.xlsx'>上の表をダウンロード</a>
+</form>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="static\\css\\addstyle.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Auto Excel Form</title>
+
+</head>
+<body>
+    <div class="forms">
+    <h2>表やテーブルの一番下に値を追加します。</h2>
+    <form action="/add" method="POST" class="add" enctype="multipart/form-data">
+        <input type="file" class="select" name="file" >ファイルを選択してください。</input> 
+
+        <div class="warn"><label>条件:データの入っている行はとばします。</label>
+        <input type="text" name="sheet_name" class="select" placeholder="シート名">列指定</input>
+        <input type="text" name="col" class="select" placeholder="列を指定してください 例:A">入力値</input>
+        <input type="text" name="value" class="select" placeholder="挿入する値 例:100"></input>
+        <input type="submit" placeholder="実行"></input> 
+        </div>
+    </form>
+    </div>
+    <div class="postsan">
+        <div class="postman">
+    {{data | safe}}
+    </div>
+    </div>
+</body>
+</html>
