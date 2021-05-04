@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="static\\css\\auto.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" name="file" class="box" enctype="multipart/form-data">
+    <h3>全シート数に値を代入します</h3>  
+    <div class="classs">  
+    <input type="file" name="filee" placeholder="ファイル"></input> <br>   
+    <input type="text" name="change" placeholder="代入する場所例:A3,C1,D2"></input><br>
+    <label>シートの数だけ改行してください</label>
+    <textarea rows="10" name="inputs" placeholder="代入する値(改行区切り)例:1,2,3\n"></textarea><br>
+    <input type="submit" placeholder="実行"></input>
+    </div>
+    </form>
+    <div class="read">
+    {{data | safe}}
+    </div>
+</body>
+</html>

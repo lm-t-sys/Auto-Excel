@@ -8,7 +8,7 @@ from IPython.display import HTML
 from openpyxl import load_workbook
 from werkzeug.utils import secure_filename 
 import os
-UPLOAD_FOLDER="static/excelfolder"
+UPLOAD_FOLDER="static/excelfolder/"
 app=Flask(__name__)
 app.config['UPLOAD_FOLDER']=UPLOAD_FOLDER
 @app.route('/create',methods=['GET','POST'])
@@ -19,32 +19,34 @@ def create():
         a=request.form.get("indexs")
         b=request.form.get("columns")
         c=request.form.get("values")
-        btn2=request.form.get("btn2")
+        btn1=request.form.get("btn1")
+        btn2=request.form.get("btn2")    
+        on=False
+        btn1=btn1.strip()
         btn2=btn2.strip()
         on=False
-        if int(btn2)>=1:
-            on=True    
+
+        if len(btn2)>=1:
+            on=True
+        a3,b3=[],[]
         a2=a.split(',')
         b2=b.split(",")
-        on=False
-        a3,b3=[],[]
         for aa in a2:
-            if a.strip()=="":
+            if a=="":
                 break
-            else:
-                a3.append(aa)
+            a3.append(aa)
 
         for bb in b2:
-            if a.strip()=="":
+            if b=="":
                 break
-            else:
-                b3.append(bb) 
+            b3.append(bb) 
         f=[] 
 
         d=c.strip().split(",") 
         for i in d:
             f.append(i)    
         f=np.array(f) 
+        len(b3)
         a3_size=len(a3)
         b3_size=len(b3)
         if on==True:
@@ -52,20 +54,23 @@ def create():
         elif b3_size>1 and on==False:
             f=np.array(f).reshape(int(f.size/b3_size),b3_size) 
         else:
-            f=np.array(f)
+            f=np.array(f) 
+        a3_size  
         if a3_size<1 and b3_size<1:
             c2=pd.DataFrame(f,columns=None,index=None)
-        elif b3_size>0:
+        elif b3_size>0 and a3_size<1:
             c2=pd.DataFrame(f,columns=b3,index=None)
         else:
             c2=pd.DataFrame(f,columns=b3,index=a3)  
+    
+
         if a3_size<1 and b3_size<1:
             c2.to_excel('static/excelfolder/to_csv.xlsx',index=False,header=False)
-        elif a3_size<1:
+        if a3_size<1 and b3_size>0:
             c2.to_excel('static/excelfolder/to_csv.xlsx',index=False)
-        else:
+        if a3_size>0 and b3_size>0:
             c2.to_excel('static/excelfolder/to_csv.xlsx')  
-        ANS=HTML(c2.to_html(classes='table table-striped'))      
+        ANS=HTML(c2.to_html())      
 
         return render_template('create.html',posts=ANS)
 
@@ -88,9 +93,41 @@ def add():
         wb.save(files)
         wb.close()
         
-        wb=pd.read_excel(files)
+        wb=pd.read_excel(files,header=0)
         a2=wb.to_html()
-        return render_template("add.html",data=a2)    
+        return render_template("add.html",data=a2) 
+
+@app.route('/auto',methods=['GET','POST'])  
+def auto():
+    if request.method=='GET':
+        return render_template('auto.html')
+    else:
+        filee=request.files['filee']
+        filenam=secure_filename(filee.filename)
+        filee.save(os.path.join(app.config['UPLOAD_FOLDER'],filenam))
+        an="static/excelfolder/to_auto.xlsx"
+        text1=request.form.get('change')
+        text2=request.form.get('inputs')
+        
+        if "\n" in text2:
+            text2a=text2.split("\n")
+        else:
+            text2a=text2
+            
+        text1a=text1.split(',')
+
+        wb=load_workbook(filename=an)
+        sheetnames=wb.sheetnames
+        for i,sheet_name in enumerate(sheetnames):
+            moji=text2a[i].split(',')
+            sheet=wb[sheet_name]
+            for j in range(len(text1a)):
+                sheet[text1a[j]]=moji[j]
+        wb.save(an)  
+        wb.close()
+        wb=pd.read_excel(filee,header=0)
+        aa3=wb.to_html()
+        return render_template('auto.html',data=aa3)             
         
          
 
@@ -103,7 +140,7 @@ def index():
     else:
          if request.form.get("hide")=="新規作成":
             posts=request.form.get("hide")
-            return render_template('/create.html',posts=posts)
+            return render_template('create.html',posts=posts)
          else:
             return redirect('/')      
       
